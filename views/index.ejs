@@ -11,12 +11,12 @@
 <body>
     <div class="main w-full min-h-screen bg-zinc-900">
         <div class="form p-10 text-white">
-            <form action="/create" method="post">
+            <form id="create-form" action="/create" method="post">
                 <input class="block w-full rounded-md outline-none px-5 py-2 bg-zinc-800" type="text"
-                    placeholder="Title goes here.." name="title" />
+                    placeholder="Title goes here.." name="title" required />
 
                 <textarea class="block w-full rounded-md outline-none px-5 py-2 mt-2 bg-zinc-800 resize-none"
-                    placeholder=" Write your task details here..." name="details"></textarea>
+                    placeholder=" Write your task details here..." name="details" required></textarea>
 
                 <input class="mt-2 bg-blue-600 px-5 py-2 rounded-md" type="submit" value="Create Task" />
             </form>
@@ -57,6 +57,14 @@
                     });
                 }
             });
+        });
+
+        // Handle Enter key for create form
+        document.getElementById('create-form').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default if you want to control behavior
+                this.submit(); // Submit the form programmatically
+            }
         });
     </script>
 </body>

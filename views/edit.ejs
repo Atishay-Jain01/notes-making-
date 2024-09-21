@@ -11,7 +11,7 @@
 <body>
     <div class="main w-full min-h-screen bg-zinc-900 p-10 text-white">
         <a class="text-blue-500 inline-block mb-10" href="/">Go Back to home</a>
-        <form action="/edit" method="post">
+        <form id="edit-form" action="/edit" method="post">
             <input class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800" type="text"
                 placeholder="Previous name" name="previous" value="<%= filename %>" />
             <input class="block w-1/4 rounded-md outline-none px-5 py-2 bg-zinc-800 mt-2" type="text"
@@ -19,6 +19,16 @@
             <input class="mt-2 bg-yellow-600 px-5 py-2 rounded-md" type="submit" value="Update Name" />
         </form>
     </div>
+
+    <script>
+        // Optional: Handle Enter key specifically if needed
+        document.getElementById('edit-form').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent default if you want to control behavior
+                this.submit(); // Submit the form programmatically
+            }
+        });
+    </script>
 </body>
 
 </html>
