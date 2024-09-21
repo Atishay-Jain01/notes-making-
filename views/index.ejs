@@ -23,21 +23,42 @@
         </div>
 
         <div class="tasks flex gap-3 flex-wrap p-10">
-            <% if(files.length> 0 ){ %>
+            <% if (files.length > 0) { %>
                 <% files.forEach(function(val) { %>
                     <div class="task min-w-72 px-3 py-4 bg-zinc-800 rounded-md">
                         <h1 class="text-white text-3xl tracking-tighter"><%= val %></h1>
-                    <div class="flex w-full justify-between item-center mt-3">
-                        <a class="text-blue-500 inline-block " href="/file/<%= val %>">Read More.</a>
-                        <a  class = "text-green-400 " href="/edit/<%= val %>">Edit Filename</a>
-                    </div>
+                        <div class="flex w-full justify-between items-center mt-3">
+                            <a class="text-blue-500 inline-block" href="/file/<%= val %>">Read More.</a>
+                            <a class="text-green-400" href="/edit/<%= val %>">Edit Filename</a>
+                            <button class="text-red-500 delete-btn" data-filename="<%= val %>">Delete</button>
+                        </div>
                     </div>
                 <% }) %>
             <% } else { %>
-                    <h3 class="text-red-600">No task yet.</h3>
-           <% } %>
+                <h3 class="text-red-600">No task yet.</h3>
+            <% } %>
         </div>
     </div>
+
+    <script>
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        deleteButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const filename = this.getAttribute('data-filename');
+                if (confirm('Are you sure you want to delete this note?')) {
+                    fetch(`/file/${filename}`, {
+                        method: 'DELETE'
+                    }).then(response => {
+                        if (response.ok) {
+                            location.reload(); // Reload the page to see changes
+                        } else {
+                            alert('Error deleting file');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
