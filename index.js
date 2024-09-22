@@ -1,3 +1,4 @@
+//fs module
 const express = require('express'); //callback & sync api
 const app = express();
 const path = require('path'); //callback & sync api
@@ -48,7 +49,6 @@ app.post('/edit', async (req, res) => {
     }
 });
 
-
 app.post('/create', async (req, res) => {
     const title = req.body.title.split(' ').join('') + '.txt'; // Ensure filename is safe
     try {
@@ -74,3 +74,4 @@ app.delete('/file/:filename', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on http://localhost:${PORT}`);
 });
+//app.listen(3000);
